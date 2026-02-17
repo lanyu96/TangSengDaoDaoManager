@@ -1,7 +1,6 @@
 FROM node:16.20.1 as builder
 WORKDIR /app
-RUN npm config set registry https://registry.npm.taobao.org
-RUN npm install pnpm -g
+RUN npm install pnpm -g --registry=https://registry.npmjs.org
 
 COPY . .
 
