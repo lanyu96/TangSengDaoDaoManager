@@ -1,10 +1,13 @@
 FROM node:16.20.1 as builder
 WORKDIR /app
-RUN npm install pnpm -g --registry=https://registry.npmjs.org
+
+# 使用 npm 官方注册表并安装与 Node.js v16 兼容的 pnpm 8 版本
+RUN npm config set registry https://registry.npmjs.org && npm install pnpm@8 -g
 
 COPY . .
 
-RUN pnpm install && pnpm build
+# 使用 pnpm 官方注册表
+RUN pnpm config set registry https://registry.npmjs.org && pnpm install && pnpm build
 
 
 FROM nginx:latest
